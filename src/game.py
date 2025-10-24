@@ -3,14 +3,7 @@ from src.bird import Bird
 from src.pipe import Pipe
 from src.base import Base
 from src.utils import check_collision
-
-WIDTH, HEIGHT = 400, 600
-FPS = 60
-PIPE_GAP = 150
-PIPE_SPEED = 3
-PIPE_SPAWN_INTERVAL = 1500 
-GROUND_HEIGHT = 100
-BG_COLOR = (135, 206, 235)
+from src.constants import *
 
 class Game:
     def __init__(self):
@@ -18,7 +11,7 @@ class Game:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Floppy Bird- Clone")
         self.clock = pygame.time.Clock()
-        self.font = pygame.font.SysFont(None, 36)
+        self.font = pygame.font.SysFont(None, 24)
 
         self.bird = Bird(80, HEIGHT // 2)
         self.pipes = []
@@ -34,19 +27,25 @@ class Game:
         top_pipe = Pipe(x, height, PIPE_GAP, HEIGHT - GROUND_HEIGHT, HEIGHT)
         self.pipes.append(top_pipe)
 
-    def handle_events(self):
+    def handle_events(self, running):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_q]:
+                running = False
+                
+                
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     if not self.game_over:
                         self.bird.jump()
                     else:
                         self.restart()
-
+        return running
+    
     def restart(self):
         self.bird = Bird(80, HEIGHT // 2)
         self.pipes.clear()
@@ -71,7 +70,6 @@ class Game:
 
         self.pipes = [pipe for pipe in self.pipes if pipe.x + pipe.width > 0]
 
-        # Collision detection
         if check_collision(self.bird, self.pipes, HEIGHT, GROUND_HEIGHT):
             self.game_over = True
 
@@ -94,14 +92,18 @@ class Game:
         self.screen.blit(score_text, (WIDTH // 2 - score_text.get_width() // 2, 30))
 
         if self.game_over:
-            text = self.font.render("GAME OVER - Press SPACE to restart", True, (255, 0, 0))
-            self.screen.blit(text, (WIDTH // 2 - text.get_width() // 2, HEIGHT // 2 - 20))
+            gameOverText = self.font.render("GAME OVER - Press SPACE to restart", True, (255, 0, 0))
+            self.screen.blit(gameOverText, (WIDTH // 2 - gameOverText.get_width() // 2, HEIGHT // 2 - 20))
+            
+            quitText = self.font.render("Press Q to Quit", True, (255, 0, 0))
+            self.screen.blit(quitText, (WIDTH // 2 - quitText.get_width() // 2, HEIGHT // 2 + 10))
 
         pygame.display.flip()
 
     def run(self):
-        while True:
-            self.handle_events()
+        running = True
+        while running:
+            running = self.handle_events(running)
             self.update()
             self.draw()
             self.clock.tick(FPS)
