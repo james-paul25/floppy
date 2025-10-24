@@ -16,7 +16,7 @@ class Game:
         self.scoreFont = pygame.font.SysFont(None, 36)
         self.infoFont = pygame.font.SysFont(None, 24)
         
-        self.bg_image = pygame.image.load("assets/bg.jpg").convert()
+        self.bg_image = pygame.image.load("assets/bg1_converted.png").convert()
         self.bg_image = pygame.transform.scale(self.bg_image, (WIDTH, HEIGHT))
 
         self.bird = Bird(80, HEIGHT // 2)
