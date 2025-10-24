@@ -25,6 +25,7 @@ class Game:
         self.game_over = False
 
         self.last_pipe_time = pygame.time.get_ticks()
+        pygame.mouse.set_visible(False)
 
     def spawn_pipe(self):
         x = WIDTH

@@ -8,6 +8,9 @@ class Bird:
         self.x = x
         self.y = y
         self.vel = 0
+        self.image = pygame.image.load("assets/cursor.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (24, 24))
+        self.rect = self.image.get_rect(center=(self.x, self.y))
 
     def jump(self):
         self.vel = JUMP_VELOCITY
@@ -15,6 +18,7 @@ class Bird:
     def update(self):
         self.vel += GRAVITY
         self.y += self.vel
+        self.rect.centery = self.y
 
     def draw(self, screen):
-        pygame.draw.circle(screen, (255, 255, 0), (int(self.x), int(self.y)), BIRD_RADIUS)
+        screen.blit(self.image, self.rect)
