@@ -5,6 +5,7 @@ from src.base import Base
 from src.utils import check_collision
 from src.constants import WIDTH, HEIGHT, FPS, PIPE_GAP, PIPE_WIDTH, PIPE_SPEED, PIPE_SPAWN_INTERVAL, GROUND_HEIGHT
 from src.constants import RED, WHITE, BLACK
+from src.score import load_high_score, save_high_score
 
 class Game:
     def __init__(self):
@@ -23,6 +24,7 @@ class Game:
         self.base = Base(HEIGHT - GROUND_HEIGHT)
         self.score = 0
         self.game_over = False
+        self.high_score = load_high_score()
 
         self.last_pipe_time = pygame.time.get_ticks()
         pygame.mouse.set_visible(False)
@@ -78,6 +80,9 @@ class Game:
 
         if check_collision(self.bird, self.pipes, HEIGHT, GROUND_HEIGHT):
             self.game_over = True
+            if self.score > self.high_score:
+                self.high_score = self.score
+                save_high_score(self.high_score)
 
         for pipe in self.pipes:
             if not pipe.passed and pipe.x + pipe.width < self.bird.x:
@@ -96,6 +101,9 @@ class Game:
 
         score_text = self.scoreFont.render(str(self.score), True, BLACK)
         self.screen.blit(score_text, (WIDTH // 2 - score_text.get_width() // 2, 30))
+        
+        high_score_text = self.infoFont.render(f"High Score: {self.high_score}", True, BLACK)
+        self.screen.blit(high_score_text, (10, 10))
 
         if self.game_over:
             gameOverText = self.infoFont.render("GAME OVER - Press SPACE to restart", True, RED)

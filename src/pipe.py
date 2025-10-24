@@ -9,6 +9,16 @@ class Pipe:
         self.width = PIPE_WIDTH 
         self.passed = False
         self.gap = PIPE_GAP
+        
+        #pipe_image = pygame.image.load("assets/pipe.png").convert_alpha()
+    
+        #self.image_top = pygame.transform.scale(pipe_image, (self.width, self.height))
+        #bottom_height = HEIGHT - GROUND_HEIGHT - (self.height + PIPE_GAP)
+        #self.image_bottom = pygame.transform.scale(pipe_image, (self.width, bottom_height))
+        #self.image_bottom = pygame.transform.flip(self.image_bottom, False, True)
+        
+        #self.top_rect = self.top_image.get_rect(bottom=self.height)
+        #self.bottom_rect = self.image_bottom.get_rect(top=self.height + self.gap)
 
     def update(self):
         self.x -= PIPE_SPEED

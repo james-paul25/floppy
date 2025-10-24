@@ -8,8 +8,8 @@ class Bird:
         self.x = x
         self.y = y
         self.vel = 0
-        self.image = pygame.image.load("assets/cursor.png").convert_alpha()
-        self.image = pygame.transform.scale(self.image, (24, 24))
+        self.image = pygame.image.load("assets/bird.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (48, 48))
         self.rect = self.image.get_rect(center=(self.x, self.y))
 
     def jump(self):
