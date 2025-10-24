@@ -13,6 +13,7 @@ class Game:
         pygame.display.set_caption("Floppy Bird- Clone")
         self.clock = pygame.time.Clock()
         self.scoreFont = pygame.font.SysFont(None, 36)
+        self.infoFont = pygame.font.SysFont(None, 24)
         
         self.bg_image = pygame.image.load("assets/bg.jpg").convert()
         self.bg_image = pygame.transform.scale(self.bg_image, (WIDTH, HEIGHT))
@@ -92,14 +93,14 @@ class Game:
 
         self.bird.draw(self.screen)
 
-        score_text = self.scoreFont.render(str(self.score), True, (255, 255, 255))
+        score_text = self.scoreFont.render(str(self.score), True, BLACK)
         self.screen.blit(score_text, (WIDTH // 2 - score_text.get_width() // 2, 30))
 
         if self.game_over:
-            gameOverText = self.scoreFont.render("GAME OVER - Press SPACE to restart", True, BLACK)
+            gameOverText = self.infoFont.render("GAME OVER - Press SPACE to restart", True, RED)
             self.screen.blit(gameOverText, (WIDTH // 2 - gameOverText.get_width() // 2, HEIGHT // 2 - 20))
             
-            quitText = self.scoreFont.render("Press Q to Quit", True, RED)
+            quitText = self.infoFont.render("Press Q to Quit", True, RED)
             self.screen.blit(quitText, (WIDTH // 2 - quitText.get_width() // 2, HEIGHT // 2 + 10))
 
         pygame.display.flip()
