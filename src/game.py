@@ -1,4 +1,6 @@
-import pygame, sys, random
+import pygame
+from pygame.locals import *
+import sys, random
 from src.bird import Bird
 from src.pipe import Pipe
 from src.base import Base

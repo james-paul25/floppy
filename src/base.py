@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 WIDTH = 400
 
 class Base:

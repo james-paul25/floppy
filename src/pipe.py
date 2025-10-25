@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 import random
 from src.constants import HEIGHT, GROUND_HEIGHT, PIPE_GAP, PIPE_WIDTH, PIPE_SPEED
 

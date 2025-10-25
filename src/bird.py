@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 GRAVITY = 0.5
 JUMP_VELOCITY = -9
 BIRD_RADIUS = 12
