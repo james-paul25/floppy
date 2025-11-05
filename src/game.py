@@ -13,7 +13,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption("Floppy Bird- Clone")
+        pygame.display.set_caption("Floppy Ghost")
         self.clock = pygame.time.Clock()
         self.scoreFont = pygame.font.SysFont(None, 36)
         self.infoFont = pygame.font.SysFont(None, 24)
